@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import html
 from datetime import datetime
 import pandas as pd
 from trade_rag import rag_trading_bot, load_or_init_index, get_new_csvs, process_new_data, ensure_faiss_index
@@ -217,7 +218,7 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("### 💡 Sample Questions")
     sample_questions = [
-        "Suggest top 5 intraday trades for next trading day",
+        "screen all stocks",
         "What are the best options trading strategies?",
         "Show me stocks with high volatility for day trading",
         "Recommend swing trading opportunities",
@@ -299,7 +300,7 @@ if st.session_state.chat_history:
             st.markdown(f"""
             <div class="chat-message bot-message">
                 <strong>🤖 Assistant ({message['timestamp']}):</strong><br>
-                {message['content'].replace(chr(10), '<br>')}
+                {html.escape(message['content']).replace(chr(10), '<br>')}
             </div>
             """, unsafe_allow_html=True)
 else:
@@ -355,7 +356,7 @@ if st.session_state.auto_send and st.session_state.current_input:
 user_input = st.text_input(
     "Ask me about trading strategies, stock analysis, or options trading:",
     key="user_input",
-    placeholder="Context: I am looking for the top 10 performing stocks for the next trading day that can be traded intraday for profits. I have attached 1-minute candle data for the last 7 working days. Requirements: Backtesting: Test your strategy thoroughly on the attached data using proper backtesting methods. Only suggest stocks where the strategy is consistently profitable. Selection Criteria: Identify stocks that meet a risk to reward ratio of 1:2. Provide only those stocks where trades can be executed with disciplined stop-loss and target levels. Output Format: For each stock, provide: Stock name/symbol Last close price Entry price Exit price (target) Stop-loss price Risk to reward ratio (must be 1:2) Accuracy/confidence level based on backtesting results Strategy Details: Explain the technical indicators and parameters used (e.g., RSI, EMA, MACD, Bollinger Bands). Provide clear entry and exit rules with conditions. Explain how stop-loss and target are calculated to maintain the 1:2 risk to reward. Share any filters or conditions applied (e.g., volume spikes, trend direction, volatility). Provide trade management rules like when to scale out or exit early if needed. Validation: Show the backtesting performance summary (win %, number of trades, average profit/loss, drawdown, etc.) Justify why these stocks are the best candidates for the next day’s intraday trading. Constraints: Only use the last 7 working days of 1-minute candles attached. Ensure realistic trade execution, slippage considerations, and transaction costs are accounted for. Do not include stocks with insufficient data or inconsistent patterns.",
+    placeholder="screen all stocks",
     value=""
 )
 

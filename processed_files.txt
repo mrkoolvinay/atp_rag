@@ -1,2 +1,0 @@
-stock_csvs\stock_data_delta.csv
-stock_csvs\candles_data_020925.csv

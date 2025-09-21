@@ -1,0 +1,6 @@
+.env
+faiss_stock_hnsw.index
+processed_files.txt
+stock_csvs/
+stock_embeddings.pkl
+__pycache__/
