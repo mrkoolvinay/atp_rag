@@ -357,7 +357,8 @@ user_input = st.text_input(
     "Ask me about trading strategies, stock analysis, or options trading:",
     key="user_input",
     placeholder="screen all stocks",
-    value=""
+    value="",
+    max_chars=2000
 )
 
 # Send button below input
